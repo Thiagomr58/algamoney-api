@@ -58,7 +58,7 @@
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <scope>runtime</scope>
-            <version>8.0.18</version>
+            <version>5.2.4</version>
         </dependency>
     </dependencies>
 
