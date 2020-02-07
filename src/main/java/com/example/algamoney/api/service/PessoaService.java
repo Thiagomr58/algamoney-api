@@ -32,7 +32,7 @@ public class PessoaService {
         pessoaRepository.save(pessoaSalva.get());
     }
 
-    private Optional<Pessoa> buscarPessoaPeloCodigo(Long codigo) {
+    public Optional<Pessoa> buscarPessoaPeloCodigo(Long codigo) {
         Optional<Pessoa> pessoaSalva = pessoaRepository.findById(codigo);
         if (!pessoaSalva.isPresent()){
             throw  new EmptyResultDataAccessException(1);

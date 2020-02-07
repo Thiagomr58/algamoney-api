@@ -3,6 +3,7 @@ package com.example.algamoney.api.resource;
 import com.example.algamoney.api.event.RecursoCriadoEvent;
 import com.example.algamoney.api.model.Lancamento;
 import com.example.algamoney.api.repository.LancamentoRepository;
+import com.example.algamoney.api.service.LancamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,9 @@ public class LancamentoResource {
     private LancamentoRepository lancamentoRepository;
 
     @Autowired
+    private LancamentoService lancamentoService;
+
+    @Autowired
     private ApplicationEventPublisher publisher;
 
     @GetMapping
@@ -45,7 +49,7 @@ public class LancamentoResource {
     public ResponseEntity<Lancamento> cadastrar(@Valid @RequestBody Lancamento lancamento,
                                                 HttpServletResponse response){
 
-        Lancamento lancamentoSalvo = lancamentoRepository.save(lancamento);
+        Lancamento lancamentoSalvo = lancamentoService.save(lancamento);
 
         publisher.publishEvent(new RecursoCriadoEvent(this, response, lancamentoSalvo.getCodigo()));
 
