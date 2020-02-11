@@ -49,10 +49,10 @@ public class LancamentoResource {
 
     @GetMapping("/{codigo}")
     public ResponseEntity<Lancamento> buscarPeloCodigo(@PathVariable Long codigo){
-        Optional<Lancamento> lancamento = lancamentoRepository.findById(codigo);
+        Lancamento lancamento = lancamentoRepository.findOne(codigo);
 
-        if (lancamento.isPresent()){
-            return ResponseEntity.ok(lancamento.get());
+        if (lancamento != null){
+            return ResponseEntity.ok(lancamento);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -73,7 +73,7 @@ public class LancamentoResource {
     @DeleteMapping("/{codigo}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long codigo) {
-        lancamentoRepository.deleteById(codigo);
+        lancamentoRepository.delete(codigo);
     }
 
     @ExceptionHandler({PessoaInexistenteOuInativaException.class})
