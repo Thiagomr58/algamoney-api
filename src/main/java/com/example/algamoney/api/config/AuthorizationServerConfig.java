@@ -25,13 +25,20 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-            .withClient("angular")
-            .secret("angular")
-            // Eu posso definir escopos diferentes para clientes diferente
-            // Não é a string escrita dentro do .scopes(), é o que eu faço depois com essa informação, apenas colocar aqui não signiica que eu bloquearei o cliente
-            .scopes("read","write") // indico qual o escopo desse cliente, e através desse escopo eu posso limitar o acesse DESTE cliente a API.
-            .authorizedGrantTypes("password", "refresh_token") // o me dá um novo access token ( atualiza o token vencido )
-            .accessTokenValiditySeconds(20)
+                .withClient("angular")
+                .secret("@ngul@r0")
+                // Eu posso definir escopos diferentes para clientes diferente
+                // Não é a string escrita dentro do .scopes(), é o que eu faço depois com essa informação, apenas colocar aqui não signiica que eu bloquearei o cliente
+                .scopes("read","write") // indico qual o escopo desse cliente, e através desse escopo eu posso limitar o acesse DESTE cliente a API.
+                .authorizedGrantTypes("password", "refresh_token") // o me dá um novo access token ( atualiza o token vencido )
+                .accessTokenValiditySeconds(1800)
+                .refreshTokenValiditySeconds(3600 * 24) // 1 dia
+            .and()
+                .withClient("mobile") // add um novo client
+                .secret("m0b1l30")
+                .scopes("read") // tem o scopo apenas para leitura
+                .authorizedGrantTypes("password", "refresh_token")
+                .accessTokenValiditySeconds(1800)
                 .refreshTokenValiditySeconds(3600 * 24); // 1 dia
     }
 
