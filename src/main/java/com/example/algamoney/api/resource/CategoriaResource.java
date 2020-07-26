@@ -27,9 +27,9 @@ public class CategoriaResource {
     @Autowired
     private ApplicationEventPublisher publisher;
 
-    @GetMapping
     // user terá acesso somente se tiver a role de pesquisar e o scopo de leitura ( read )
     // o scopo é do CLIENT e não do usuário logado
+    @GetMapping
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA') and #oauth2.hasScope('read')") // utilizanod o scopo definido no AuthorizationServerConfig - confiure
     public List<Categoria> listar(){
         return categoriaRepository.findAll();
