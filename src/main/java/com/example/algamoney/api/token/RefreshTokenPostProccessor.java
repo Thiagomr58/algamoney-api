@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Thiago Rodrigues on 11/02/2020
  */
 @ControllerAdvice
-public class RefreshTokenPostProccessor implements ResponseBodyAdvice<OAuth2AccessToken> {
+public class RefreshTokenPostProccessor implements ResponseBodyAdvice<OAuth2AccessToken> { // ResponseBodyAdvice< Tipo do dado que eu quero interceptar >:
 
     @Override
     public boolean supports(MethodParameter returnType,
